@@ -20,6 +20,21 @@ dependencies {
     api 'mysql:mysql-connector-java:8.0.28'
     api 'com.google.code.gson:gson:2.10.1'
     api 'jakarta.xml.bind:jakarta.xml.bind-api:2.3.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.0.3'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.0.3'
+}
+
+test {
+    //Enable Junit5.
+    useJUnitPlatform()
+
+    //Always run tests, even when nothing changed.
+    dependsOn 'cleanTest'
+
+    //Show test results.
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
 }
 
 group = 'org.example'

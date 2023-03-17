@@ -12,29 +12,8 @@ import java.util.List;
 
 public class TaskManagerOperations {
 
-
-//    public static void createTable() throws SQLException{
-//
-//        String sql="CREATE TABLE IF NOT EXISTS TASKMANAGER (\n"
-//                +"id INT NOT NULL AUTO_INCREMENT,\n"
-//                +"name VARCHAR(255) NOT NULL, \n"
-//                +"description VARCHAR(255) NOT NULL, \n"
-//                +"date DATE NOT NULL, \n"
-//                +"PRIMARY KEY (id) \n"
-//                +");";
-//
-//                Connection connection=TaskManagerConnection.connect();
-//
-//                try(Statement stmt= con.createStatement()){
-//                    stmt.execute(sql);
-//                    System.out.println("Table created");
-//                }
-//                catch (SQLException e){
-//                   System.out.println("Error creating table: "+e.getMessage());
-//                }
-//                TaskManagerConnection.disConnect();
-//    }
-
+    private TaskManagerOperations(){
+    }
     //Adding tasks
     public static TaskManager addTask(TaskManager task){
         String sql="INSERT INTO TASKMANAGER (id, name, description,dueDate) VALUES (?, ?, ?, ?)";
@@ -53,8 +32,10 @@ public class TaskManagerOperations {
         } catch (SQLException e) {
             System.out.println("Error Adding Values: "+ e.getMessage());
         }
-        TaskManagerPreparedStatement.closePreparedStatement();
-        TaskManagerConnection.disConnect();
+        finally {
+            TaskManagerPreparedStatement.closePreparedStatement();
+            TaskManagerConnection.disConnect();
+        }
 
         return task;
     }
@@ -78,8 +59,10 @@ public class TaskManagerOperations {
         catch (SQLException e){
             System.out.println("Error Updating Values: "+e.getMessage());
         }
-        TaskManagerPreparedStatement.closePreparedStatement();
-        TaskManagerConnection.disConnect();
+        finally {
+            TaskManagerPreparedStatement.closePreparedStatement();
+            TaskManagerConnection.disConnect();
+        }
 
         return task;
     }
@@ -99,8 +82,10 @@ public class TaskManagerOperations {
         catch (SQLException e){
             System.out.println("Error Deleting Value: "+ e.getMessage());
         }
-        TaskManagerPreparedStatement.closePreparedStatement();
-        TaskManagerConnection.disConnect();
+        finally {
+            TaskManagerPreparedStatement.closePreparedStatement();
+            TaskManagerConnection.disConnect();
+        }
     }
 
     //Get All Tasks
@@ -125,8 +110,10 @@ public class TaskManagerOperations {
         catch (SQLException e){
             System.out.println("Error in viewing all messages: "+ e.getMessage());
         }
-        TaskManagerPreparedStatement.closePreparedStatement();
-        TaskManagerConnection.disConnect();
+        finally {
+            TaskManagerPreparedStatement.closePreparedStatement();
+            TaskManagerConnection.disConnect();
+        }
 
         return tasks;
     }
@@ -155,8 +142,10 @@ public class TaskManagerOperations {
         catch(SQLException e){
             System.out.println("Error retriving Task: "+e.getMessage());
         }
-        TaskManagerPreparedStatement.closePreparedStatement();
-        TaskManagerConnection.disConnect();
+        finally {
+            TaskManagerPreparedStatement.closePreparedStatement();
+            TaskManagerConnection.disConnect();
+        }
         return tasks;
     }
 }

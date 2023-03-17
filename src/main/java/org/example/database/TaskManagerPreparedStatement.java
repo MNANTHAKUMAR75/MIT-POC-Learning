@@ -7,6 +7,10 @@ import java.sql.SQLException;
 public class TaskManagerPreparedStatement {
     private static PreparedStatement preparedStatement=null;
 
+    private TaskManagerPreparedStatement(){
+
+    }
+
     public static PreparedStatement getPreparedStatement(Connection connection,String sql){
         try{
             preparedStatement=connection.prepareStatement(sql);

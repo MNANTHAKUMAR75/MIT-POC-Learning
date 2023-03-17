@@ -11,6 +11,10 @@ public class TaskManagerConnection {
     private static final String DB_DRIVER="com.mysql.jdbc.Driver";
     private  static Connection connection=null;
 
+    private TaskManagerConnection(){
+
+    }
+
     public static Connection connect(){
         try{
             Class.forName(DB_DRIVER);

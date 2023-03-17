@@ -8,28 +8,27 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+
 @Path("task")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class TaskManagerResource {
-
-    TaskManagerOperations taskManagerOperations=new TaskManagerOperations();
 
     //Get all tasks
     @GET
     @Path("/all")
     public Response getAllTask(){
         Gson gson=new Gson();
-        String entity= gson.toJson(taskManagerOperations.getAllTasks());
+        String entity= gson.toJson(TaskManagerOperations.getAllTasks());
         return Response.status(Response.Status.OK).entity(entity).build();
     }
 
     //Get task by id
     @Path("/{taskId}")
     @GET
-    public Response getTask(@PathParam("taskId") int id){
+    public Response getTasks(@PathParam("taskId") int id){
         Gson gson=new Gson();
-        String entity=gson.toJson(taskManagerOperations.getTask(id));
+        String entity=gson.toJson(TaskManagerOperations.getTask(id));
         return Response.status(Response.Status.OK).entity(entity).build();
     }
 
@@ -37,7 +36,7 @@ public class TaskManagerResource {
     @POST
     public Response addTask(TaskManager task){
         Gson gson=new Gson();
-        String entity=gson.toJson(taskManagerOperations.addTask(task));
+        String entity=gson.toJson(TaskManagerOperations.addTask(task));
         return Response.status(Response.Status.ACCEPTED).entity(entity).build();
     }
 
@@ -46,15 +45,14 @@ public class TaskManagerResource {
     @PUT
     public Response updateTask(TaskManager task,@PathParam("taskId") int taskId) {
         Gson gson = new Gson();
-        String entity = gson.toJson(taskManagerOperations.updateTask(task, taskId));
+        String entity = gson.toJson(TaskManagerOperations.updateTask(task, taskId));
         return Response.status(Response.Status.ACCEPTED).entity(entity).build();
     }
 
     //Delete task
     @Path("/{taskId}")
     @DELETE
-    public void deleteTask(@PathParam("taskId") int taskId){
-        taskManagerOperations.deleteTask(taskId);
+    public void deleteTask(@PathParam("taskId") int taskId){TaskManagerOperations.deleteTask(taskId);
     }
 
 }

@@ -148,4 +148,26 @@ public class TaskManagerOperations {
         }
         return tasks;
     }
+
+    public static boolean containsTask(int taskId){
+        String sql="select COUNT(*) from TaskManager where id=?";
+
+        Connection connection=TaskManagerConnection.connect();
+        PreparedStatement preparedStatement=TaskManagerPreparedStatement.getPreparedStatement(connection,sql);
+
+        try{
+            preparedStatement.setInt(1,taskId);
+            ResultSet result=preparedStatement.executeQuery();
+            if (result.next()){
+                int count=result.getInt(1);
+                if(count==0){
+                    return false;
+                }
+            }
+        }
+        catch (SQLException e){
+            e.getMessage();
+        }
+        return true;
+    }
 }

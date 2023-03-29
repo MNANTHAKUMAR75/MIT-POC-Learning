@@ -1,0 +1,12 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                git 'https://github.com/MNANTHAKUMAR75/MIT-POC-Learning.git'
+                bat '.\mvnw clean compile'
+            }
+        }
+    }
+}
